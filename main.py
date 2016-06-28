@@ -26,6 +26,8 @@ class MainHandler(webapp2.RequestHandler):
 
         shuffledmoji = moji1 + moji2
 
+         self.response.out.write(cgi.escape(self.request.get("moji1")))
+
 
 
 app = webapp2.WSGIApplication([
