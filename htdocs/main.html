@@ -1,0 +1,16 @@
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <body>
+       <form action="/" method="POST">
+      moji1: <input moji1="moji1" type="text" /><br />
+      moji2: <input moji2="moji2" type="text" /><br />
+      <button type="submit">Save</button>
+    </form>
+<hr />
+<p><%
+      String shmoji = request.getParameter("moji1");
+      out.println(shmoji);
+%></p>
+  </body>
+</html>
