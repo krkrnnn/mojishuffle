@@ -6,11 +6,14 @@ threadsafe: yes
 
 handlers:
 - url: /
-  static_files: htdocs/main.html
+  static_files: main.html
   upload: /
 
 - url: .*
   script: htdocs
+
+- url: /.*
+  script: main.app
 
 libraries:
 - name: webapp2

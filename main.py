@@ -15,19 +15,38 @@
 # limitations under the License.
 #
 import webapp2
+import cgi
+
+html_body = """
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+<body>
+%s
+</body></html>"""
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('Hello, World!')
 
-    def post(self):
-        moji1 = self.request.get('moji1')
-        moji2 = self.request.get('moji2')
+        form = cgi.FieldStorage()
+        m1 = form.getvalue('moji1', '')
+        m2 = form.getvalue('moji2', '')
+        shufflemoji = ''
 
-        shuffledmoji = moji1 + moji2
+        for index in range(0, min(len(s1), len(s2))-1):
+            shufflemoji += m1[index]
+            shufflemoji += m2[index]
 
-         self.response.out.write(cgi.escape(self.request.get("moji1")))
 
+        if len(s1) > len(s2):
+            shufflemoji += s1[len(s2):len(s1)-1]
+        elif  len(s2) > len(s1):
+            shufflemoji += s2[len(s1):len(s2)-1]
+
+        print "Content-type: text/html\n"
+        print html_body % shufflemoji
 
 
 app = webapp2.WSGIApplication([
