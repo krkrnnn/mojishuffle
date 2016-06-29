@@ -31,19 +31,19 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write('Hello, World!')
 
         form = cgi.FieldStorage()
-        m1 = form.getvalue('moji1', '')
-        m2 = form.getvalue('moji2', '')
+        m1 = form['moji1'].value
+        m2 = form['moji2'].value
         shufflemoji = ''
 
-        for index in range(0, min(len(s1), len(s2))-1):
+        for index in range(0, min(len(m1), len(m2))-1):
             shufflemoji += m1[index]
             shufflemoji += m2[index]
 
 
-        if len(s1) > len(s2):
-            shufflemoji += s1[len(s2):len(s1)-1]
-        elif  len(s2) > len(s1):
-            shufflemoji += s2[len(s1):len(s2)-1]
+        if len(m1) > len(m2):
+            shufflemoji += m1[len(m2):len(m1)-1]
+        elif  len(m2) > len(m1):
+            shufflemoji += m2[len(m1):len(m2)-1]
 
         print "Content-type: text/html\n"
         print html_body % shufflemoji
